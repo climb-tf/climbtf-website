@@ -1,0 +1,119 @@
+<div class="content">
+  <div class="map-info">
+    <h1> Map: {{ mapId }}</h1>
+    <div class="map-stats">
+      Playcount: 2,130
+    </div>
+  </div>
+  <mat-radio-group aria-label="Visible Scores">
+    <mat-radio-button value="1" [checked]="true">All</mat-radio-button>
+    <mat-radio-button value="2">PRO Only</mat-radio-button>
+    <mat-radio-button value="2">TP Only</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field>
+    <mat-label>Username / Steam ID</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Username" #input>
+  </mat-form-field>
+
+
+  <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false" mat-align-tabs="left">
+    <mat-tab label="Main Classes">
+      <mat-grid-list cols="2">
+        <!-- //Medic, Spy -->
+        <mat-grid-tile>
+          <div class="leaderboard">
+            <h2>Medic/Spy</h2>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="Rank">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Rank </th>
+                  <td mat-cell *matCellDef="let row"> #{{row.rank}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Username">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+                  <td mat-cell *matCellDef="let row" class="cell-username"> {{row.user.username}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Time">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+                  <td mat-cell *matCellDef="let row"> {{ formatTime(row) }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="TPs">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> TPs </th>
+                  <td mat-cell *matCellDef="let row"> N/A </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Date">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                  <td mat-cell *matCellDef="let row"> {{ formatDate(row) }} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns;" [ngClass]="{gray: even}">
+                </tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">"{{input.value}}" not found.</td>
+                </tr>
+              </table>
+
+              <mat-paginator [pageSize]="15" aria-label="Select page of users"></mat-paginator>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <!-- //Engie, Sniper, Pyro -->
+        <mat-grid-tile>
+          <div class="leaderboard">
+            <h2>Engie/Sniper/Pyro</h2>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="Rank">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Rank </th>
+                  <td mat-cell *matCellDef="let row"> #{{row.rank}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Username">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+                  <td mat-cell *matCellDef="let row" class="cell-username"> {{row.user.username}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Time">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+                  <td mat-cell *matCellDef="let row"> {{row.runTime}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="TPs">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> TPs </th>
+                  <td mat-cell *matCellDef="let row"> N/A </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Date">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                  <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns;" [ngClass]="{gray: even}">
+                </tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">"{{input.value}}" not found.</td>
+                </tr>
+              </table>
+
+              <mat-paginator [pageSize]="15" aria-label="Select page of users"></mat-paginator>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-tab>
+    <mat-tab label="Other">
+      PENDING
+    </mat-tab>
+  </mat-tab-group>
+</div>

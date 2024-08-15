@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$magenta-palette,
+  ),
+));
+
+.map-card {
+  max-width: 200px;
+  margin: 8px;
+  border-radius: 0px;
+  @include mat.elevation(4);
+}
+
+.map-title {
+  color: mat.get-theme-color($theme, primary, 80);
+  text-decoration: none;
+}
+
+.is-focusable {
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 51%;
+  //background-color: mat.get-theme-color($theme, neutral, 25);
+  margin-left: auto;
+  margin-right: auto;
+}
+//
+//.spy {
+//  margin-left: -16px;
+//  font-size: 13px;
+//  margin-bottom: auto;
+//  margin-top: auto;
+//  background: #181879;
+//  display: flex;
+//}
+//
+//.sniper {
+//  font-size: 13px;
+//  margin-bottom: auto;
+//  margin-top: auto;
+//  background: #ac7f2f;
+//}
+
